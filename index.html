@@ -221,7 +221,7 @@
     .countdown-box:hover { transform: translateY(-4px); }
     .countdown-number { font-family: 'Amiri', serif; font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 700; background: linear-gradient(135deg, var(--rose), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .countdown-label { font-size: 0.9rem; font-weight: 600; color: var(--text-mid); margin-top: 0.5rem; }
-    #celebration-msg { display: none; font-family: 'Aref Ruqaa', serif; font-size: clamp(2rem, 6vw, 3.5rem); background: linear-gradient(135deg, var(--rose), var(--gold), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: pulse-glow 2s infinite; margin-top: 1rem; }
+    #celebration-msg { display: block; font-family: 'Aref Ruqaa', serif; font-size: clamp(2rem, 6vw, 3.5rem); background: linear-gradient(135deg, var(--rose), var(--gold), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: pulse-glow 2s infinite; margin-top: 1rem; }
 
     /* ── MESSAGE ── */
     .message-section { text-align: center; }
@@ -299,7 +299,7 @@
     </nav>
 
     <section class="hero" id="hero">
-      <div class="hero-badge">✨ الوقت قرب خلاص ✨</div>
+      <div class="hero-badge">✨ الوقت جه خلاص ✨</div>
       <div class="cake-icon">🎂</div>
       <h1 class="hero-title">كل سنة وأنتِ طيبة،<br>يا سلمى!</h1>
       <p class="hero-subtitle">بتمنالك يوم جميل زيك 🌸</p>
@@ -312,7 +312,7 @@
     <section class="countdown-section" id="countdown">
       <div class="reveal">
         <p class="section-label"></p>
-        <h2 class="section-title">بنعد تنازلي <em>لليوم المنتظر</em></h2>
+        <h2 class="section-title">وصلنا <em>لليوم المنتظر</em></h2>
         <div class="countdown-grid">
           <div class="countdown-box"><div class="countdown-number" id="days">00</div><div class="countdown-label">أيام</div></div>
           <div class="countdown-box"><div class="countdown-number" id="hours">00</div><div class="countdown-label">ساعات</div></div>
@@ -371,14 +371,11 @@
 
     <footer>
       <p class="hearts">🌸 💜 🌸</p>
-      <p style="margin-top:0.5rem;">البيدج  دي اتعملت عشان سلمى وبس &mdash; 28 أبريل 2026</p>
+      <p style="margin-top:0.5rem;">البيدج دي اتعملت عشان سلمى وبس &mdash; 28 أبريل 2026</p>
     </footer>
   </div>
 
   <script>
-    /* ============================================================
-        ENVELOPE & SITE REVEAL LOGIC
-       ============================================================ */
     function openEnvelope() {
       const env = document.getElementById('envelope');
       if (!env.classList.contains('open')) {
@@ -388,37 +385,32 @@
     }
 
     function enterSite(e) {
-      e.stopPropagation();
+      e.stopPropagation(); 
       const screen = document.getElementById('envelope-screen');
       const mainSite = document.getElementById('main-site');
+      
       screen.style.opacity = '0';
+      
       setTimeout(() => {
         screen.style.display = 'none';
         mainSite.style.display = 'block';
         setTimeout(() => {
           mainSite.style.opacity = '1';
-          startCelebrations();
+          startCelebrations(); 
         }, 50);
       }, 1000);
     }
 
-    /* ============================================================
-        COUNTDOWN TIMER (MODIFIED TO STAY 00)
-       ============================================================ */
+    /* تم تعطيل تحديث العداد ليبقى أصفاراً ثابتة */
     function updateCountdown() {
-      // تم إلغاء العمليات الحسابية ليبقى العداد دائماً 00
       document.getElementById('days').textContent    = '00';
       document.getElementById('hours').textContent   = '00';
       document.getElementById('minutes').textContent = '00';
       document.getElementById('seconds').textContent = '00';
-      document.getElementById('celebration-msg').style.display = 'block';
     }
 
     updateCountdown();
 
-    /* ============================================================
-        CONFETTI & HEARTS
-       ============================================================ */
     const canvas = document.getElementById('confetti-canvas');
     const ctx    = canvas.getContext('2d');
     let confettiActive = false;
@@ -427,11 +419,7 @@
     function startCelebrations() {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
-      window.addEventListener('resize', () => {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-
+      
       const COLORS = ['#f9a8c9','#e96a9e','#d8b4fe','#9b5de5','#f4c542','#fce4f0','#a78bfa','#fb7185'];
 
       class Confetto {
@@ -483,7 +471,7 @@
       }
       animateConfetti();
 
-      setTimeout(() => { confettiActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); }, 10000);
+      setTimeout(() => { confettiActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); }, 15000);
 
       const heartEmojis = ['💕','🌸','💜','✨','🎀','💖','🌷'];
       const container   = document.getElementById('hearts-container');
